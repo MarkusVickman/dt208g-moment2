@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DT208G Moment 2</title>
+    <script src="script.ts" type="module"></script>
+    <!--Länk till css-fil-->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <main id="main">
+        <h1>Todo-lista</h1>
+        <p>På den här webbplatsen kan du skapa din egna att göra lista. Det går att Prioritera där 1 är högsta priotitet och det går att checka av det som är klart.</p>
+            <!--Formulär för att skriva in kurser som lagras till lokalstorage. URLEN fungerar smidigare sparad som text för mobilanvändare-->
+        <form id="form">
+            <label for="task">Att göra:</label><br>
+            <textarea id="task" name="task" placeholder="Skriv en todo här...."></textarea>
+            <br>
+            <label for="completed">Färdig:</label>
+            <input type="checkbox" id="completed" name="completed">
+            <br>
+            <label for="priority">Prioritet:</label>
+            <select id="priority" name="priority" required>
+              <option value="" selected disabled hidden></option>
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+            </select> 
+            <br>
+            <button type="submit">Spara</button>       
+            <button type="button" id="empty-localstorage">Radera listan</button>
+        </form>
+        <!--Meddelande för när formuläret oven fyllts i-->
+        <p id="alert"></p>
+        <p id="alert2"></p>
+        <article>
+            <h2>Att göra:</h2>
+            <div id="courselist"></div>
+        </article>
+    </main>
+</body>
+</html>
