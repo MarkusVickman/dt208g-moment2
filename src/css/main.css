@@ -1,7 +1,13 @@
 /*SUPERSNYGG BAKGRUNDFÄRG*/
+*{
+    box-sizing: border-box;
+}
 body{
-    background-color: rgb(0, 8, 76);
-    color: white;
+    background-color: rgb(248, 246, 240);
+    color: black;
+    text-align: left;
+    font-size: 1.1em;
+    line-height: 1.5em;
 }
 
 input{
@@ -9,7 +15,7 @@ input{
 }
 
 label{
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 #completed{
@@ -32,10 +38,9 @@ option{
     font-size: 1.1em;
 }
 
-
 /*begränsar vidd på main*/
 main{
-    width: 700px;
+    width: 500px;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -43,10 +48,14 @@ main{
 
 /*responsivt formulär*/
 form{
-    width: 400px;
+    width: 450px;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 70px;
+    box-shadow: 3px 3px 3px 3px rgb(0, 0, 0, 0.2);
+    padding: 40px;
+
 }
 
 /*Styling av knappar*/
@@ -56,37 +65,82 @@ button{
     border-radius: 10px;
     border-style: none;
     font-size: 1.1em;
-    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px 2px rgb(0, 0, 0, 0.2);
     margin-left: 5px;
     margin-right: 5px;
     /*För att knapptext ska visas korrekt i safari på iphone*/
     -webkit-text-fill-color:black;
     margin-top: 10px;
+    display: block;
 }
 
 /*Hover effekt till knappar*/
 button:hover{
-    background-color: rgb(110, 175, 119);
+    background-color: rgb(201, 214, 223);
     box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
 }
-#empty-localstorage:hover{
+
+#empty-localstorage{
+    background-color: rgb(255, 183, 183);
+}
+
+#empty-localstorage:hover, .remove-todo:hover{
     background-color: rgb(255, 137, 137);
     box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
 }
 
+.remove-todo{
+    float: right;
+    bottom: 0px;
+}
+
+.inline{
+    display: inline-block;
+    position: relative;
+    bottom: -15px;
+}
+
+.priority1 p, .priority2 p, .priority3 p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.priority{
+    margin-right: 50px;
+    position: relative;
+
+}
+
+
+
 /*styling av div till inläggen*/
-.newdiv{
-    background-color:  rgb(200, 194, 137);
+.priority1, .priority2, .priority3{
+    background-color:  rgba(0, 0, 0, 0.733);
     padding: 10px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: white;
+    max-width: 450px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#todo-btn{
+    margin-right: 40px;
+}
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    width: 280px;
 }
 
 /*hover effekt*/
-.newdiv:hover{
-    background-color: rgb(187, 180, 120);
-    padding: 10px;
-    border-radius: 10px;
+.priority1:hover, .priority2:hover, .priority3:hover{
+    background-color:  rgba(0, 0, 0, 0.9);
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
 }
 
 /*Padding till raderna i vardera inlägg*/ 
@@ -100,4 +154,13 @@ button:hover{
     border-color: white;
     border-width: 3px;
     border-radius: 5px;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+h3{
+    margin-top: 0px;
+    margin-bottom: ;
 }

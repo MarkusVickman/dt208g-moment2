@@ -4,6 +4,9 @@ import { TodoList } from "./todolist-class";
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
 const emptyLocalStorage: HTMLFormElement = document.getElementById("empty-localstorage") as HTMLFormElement;
 const todoDiv: HTMLDivElement = (document.getElementById("todo-div") as HTMLInputElement);
+const todoCompleted: HTMLDivElement = (document.getElementById("todo-completed") as HTMLInputElement);
+const completedBtn: HTMLDivElement = (document.getElementById("completed-btn") as HTMLInputElement);
+const todoBtn: HTMLDivElement = (document.getElementById("todo-btn") as HTMLInputElement);
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -19,6 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
             TodoList.saveToLocalStorage();
         }
         buildList();
+    })
+
+    completedBtn.addEventListener("click", (e) =>{
+        todoDiv.style.display = "none";
+        completedBtn.style.display = "none";
+        todoCompleted.style.display = "block";
+        todoBtn.style.display = "block";
+    })
+
+    todoBtn.addEventListener("click", (e) =>{
+        todoCompleted.style.display = "none";
+        todoBtn.style.display = "none";
+        todoDiv.style.display = "block";
+        completedBtn.style.display = "block";
     })
 
     emptyLocalStorage.addEventListener("click", (e) => {
@@ -39,6 +56,7 @@ function buildList(): void {
     TodoList.loadFromLocalStorage();
     let tempArray = TodoList.getTodos();
     todoDiv.innerHTML="";
+    todoCompleted.innerHTML="";
     
     if(tempArray.length > 0){
 
@@ -46,22 +64,23 @@ function buildList(): void {
         for (let i = 0; i < tempArray.length; i++) {
             let box: string = "";
             let disabled: string = "";
-            const newDiv: HTMLDivElement = document.createElement("div");
+            let newDiv: HTMLDivElement = document.createElement("div");
+            let whichDiv: HTMLDivElement = todoDiv;
             console.log(tempArray[i].completed);
             if(tempArray[i].completed === true){
                 box = "checked";
                 disabled = "disabled";
+                whichDiv = todoCompleted;
             }
             newDiv.classList.add(`priority${tempArray[i].priority}`);
             newDiv.innerHTML=`
-            <h2>Datum</h2>
             <p>${tempArray[i].task}</p>
-            <h3>Prioritet: ${tempArray[i].priority}</h3>
-            <label for="completed">Färdig:</label>
-            <input type="checkbox" class="box" ${disabled} ${box} id="${i}" name="completed">
+            <p class="inline priority">Prioritet: ${tempArray[i].priority}</p>
+            <label for="completed" class="inline">Färdig:</label>
+            <input type="checkbox" class="inline box" ${disabled} ${box} id="${i}" name="completed">
             <button title="${i}" class="remove-todo">Ta bort</button>
             `;
-            todoDiv.appendChild(newDiv);
+            whichDiv.appendChild(newDiv);
         }
     };
 }

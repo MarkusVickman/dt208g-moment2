@@ -11,10 +11,10 @@
 <body>
     <main id="main">
         <h1>Todo-lista</h1>
-        <p>På den här webbplatsen kan du skapa din egna att göra lista. Det går att Prioritera där 1 är högsta priotitet och det går att checka av det som är klart.</p>
+        <p>Skapa din egna todo-lista.</p>
             <!--Formulär för att skriva in kurser som lagras till lokalstorage. URLEN fungerar smidigare sparad som text för mobilanvändare-->
         <form id="form">
-            <label for="task">Att göra:</label><br>
+            <label for="task"></label><br>
             <textarea id="task" name="task" placeholder="Skriv en todo här...."></textarea>
             <br>
             <!--<label for="completed">Färdig:</label>
@@ -28,16 +28,19 @@
               <option value=3>3</option>
             </select> 
             <br>
-            <button type="submit">Spara</button>       
-            <button type="button" id="empty-localstorage">Radera listan</button>
+            <button type="submit" class="inline">Spara</button>       
+            <button type="button" id="empty-localstorage" class="inline">Radera listan</button>
         </form>
-        <!--Meddelande för när formuläret oven fyllts i-->
-        <p id="alert"></p>
-        <p id="alert2"></p>
-        <article>
-            <h2>Att göra:</h2>
+
+        <div class="center"><button id="todo-btn" class="inline">Kvar att göra</button><button id="completed-btn" class="inline">Avklarade</button></div>
+        <article id="todo-article">
+            <h2>Kvar att göra</h2>
             <div id="todo-div"></div>
         </article>
+        <article id="completed-article">
+            <h2>Avklarade</h2>
+        <div id="todo-completed"></div>
+    </article>
     </main>
 </body>
 </html>
