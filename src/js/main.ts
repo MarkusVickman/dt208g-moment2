@@ -1,92 +1,8 @@
-/*TypeScript-kod för att hantera todo-lista på webbplatsen där användaren kan spara in "att göra text", prioritet och om uppgiften är slutförd. Detta lagras till localstorage. 
-Användaren kan även tabort tidigare inlägg*/
+import { TodoList } from "./todolist-class";
 
 //För att kunna läsa in formuläret
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
 const emptyLocalStorage: HTMLFormElement = document.getElementById("empty-localstorage") as HTMLFormElement;
-//Egen typ för att säkerställa att prioritet är rätt siffra
-//type PriorityRange = 1|2|3;
-
-//Interface som typmall för objekt till todo-listan
-interface Todo {
-    task: string;
-    completed: boolean;
-    priority: /*PriorityRange*/number;
-}
-
-//Klass för att skapa objekt till todo-listan som följer interface-mallen Todo
-class TodoList implements Todo {
-    task: string;
-    completed: boolean;
-    priority: /*PriorityRange*/number;
-
-    todos: Todo[] = [];
-
-    constructor(task: string, completed: boolean, priority: /*PriorityRange*/number) {
-
-        let newTask: Todo = {
-            task: task,
-            completed: completed,
-            priority: priority
-        };
-
-      //  this.todos.push(newTask);
-        this.saveToLocalStorage(newTask);
-        this.loadFromLocalStorage();
-        //console.log(this.todos);
-
-    }
-
-    addTodo(task: string, completed: boolean, priority: /*PriorityRange*/number): boolean{
-        if(task.length > 0 && priority === (1|2|3)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    markTodoCompleted(todoIndex: number): void{
-      //  if todoIndex
-    }
-
-    getTodos(): Todo[]{
-      /*  if (localStorage.length >= 1) {
-            for (let i = 0; i < localStorage.length; i++) {
-                // set iteration key name
-                const key: string = localStorage.key(i)!;
-                // use key name to retrieve the corresponding value
-                const value: string = localStorage.getItem(key)!;
-                this.todos((JSON.parse(value)));
-            }
-        }*/
-        return 
-    }
-
-    saveToLocalStorage(saveTask: Todo): void{
-
-        //console.log(testDescription);
-         //Localstorage sparar todo-datan
-         localStorage.setItem(saveTask.task, JSON.stringify(saveTask));
-    }
-
-    loadFromLocalStorage(): void{
-        if (localStorage.length >= 1) {
-            for (let i = 0; i < localStorage.length; i++) {
-                // 
-                const key: string = localStorage.key(i)!;
-                // 
-                const value: any = localStorage.getItem(key)!;
-                let tempObject: Todo = ((JSON.parse(value)));
-                this.todos.push(tempObject);
-                console.log(tempObject);
-            }
-        }
-        console.log(this.todos);
-    }
-
-}
-
 
 
 emptyLocalStorage.addEventListener("click", (e) => {
@@ -105,41 +21,8 @@ form.addEventListener("submit", (e) => {
     new TodoList (taskInput, completedInput, priorityInput);
 
 
-    // testar om kurkoden redan finns på sidan, ger då felmeddelande
-   /* if (document.getElementById(codeInput) !== null) {
-        alert1.innerHTML = `
-    <p style="color:Red;"><strong>${codeInput} finns redan i listan!</strong></p>
-    `;
-    }
-    // testar om progression är rätt ifyllt, ger annars felmeddelande
-    else if (progressionInput !== "A" && progressionInput !== "B" && progressionInput !== "C" && progressionInput !== "AV") {
-        alert2.innerHTML = `
-    <p style="color:Red;"><strong>Progression får endast vara A, B, C eller AV!</strong></p>
-    `;
-    }
-    // testar om det är en webbadress istället för genom html. I htmlformuläret gav ingen tydlig fel indikation på mobiltelefoner så byggde en egen.
-    else if (syllabusInput.length > 0 && syllabusInput.toLowerCase().includes("www") === false) {
-        alert2.innerHTML = `
-        <p style="color:Red;"><strong>Webbadressen måste innehålla www. Fältet kan också lämnas tomt.</strong></p>
-        `;
-    }
-    //Annars skapas ett objekt med inputdata och en bekräftelse skrivs ut.
-    else {
-        alert1.innerHTML = `<p style="color:Green;"><strong>${codeInput} är sparad i listan</strong></p>`;
-        alert2.innerHTML = "";
-        // Skapa ett användarobjekt
-        const newCourse: CourseInfo = {
-            code: codeInput,
-            name: nameInput,
-            progression: progressionInput,
-            syllabus: syllabusInput,
-        };
-        //Localstorage sparar kursdatan
-        localStorage.setItem(codeInput, JSON.stringify(newCourse));
-        // Funktionen för att bygga inlägg på sidan initieras.
-        manageCourses(newCourse);
-    }*/
 });
+
 
 
 
