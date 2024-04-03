@@ -60,6 +60,11 @@ export class TodoList implements Todo {
         this.todos = tempTodos;
     }
 
+    public static removeTodo(index): void {
+        this.todos.splice(index, 1);
+        this.saveToLocalStorage();
+    }
+
     public static markTodoCompleted(todoIndex: number): void {
         const tempObject = this.todos[todoIndex];
         const newTodoList = new TodoList(tempObject.task, true, tempObject.priority);

@@ -11,12 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     todoDiv.addEventListener("click", (e) => {
         if((e.target as HTMLButtonElement).classList.contains('remove-todo')){
-
+            let index = (e.target as HTMLElement).title;
+            TodoList.removeTodo(index);
         }
         if((e.target as HTMLButtonElement).classList.contains('box')){
             TodoList.markTodoCompleted(Number((e.target as HTMLElement).id));
             TodoList.saveToLocalStorage();
         }
+        buildList();
     })
 
     emptyLocalStorage.addEventListener("click", (e) => {
@@ -36,9 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function buildList(): void {
     TodoList.loadFromLocalStorage();
     let tempArray = TodoList.getTodos();
+    todoDiv.innerHTML="";
     
     if(tempArray.length > 0){
-        todoDiv.innerHTML="";
+
 
         for (let i = 0; i < tempArray.length; i++) {
             let box: string = "";
