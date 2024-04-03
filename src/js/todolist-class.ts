@@ -31,22 +31,22 @@ export class TodoList implements Todo {
     }
 
     public static addTodo(addNew: Todo/*task: string, completed: boolean, priority: number*/): boolean {
-        console.log(addNew.task.length + " " + addNew.priority);
+        //console.log(addNew.task.length + " " + addNew.priority);
         if (addNew.task.length > 0 && (addNew.priority === 1 || addNew.priority === 2 || addNew.priority === 3)) {
             this.todos.push(addNew);
-            let sortedArray: Todo[] = this.todos.sort((n1,n2) => {
+            this.todos.sort((n1, n2) => {
                 if (n1.priority > n2.priority) {
                     return 1;
                 }
-            
+
                 if (n1.priority < n2.priority) {
                     return -1;
                 }
-            
+
                 return 0;
             });
-            this.todos = sortedArray;
-            console.log(this.todos);
+            //this.todos = sortedArray;
+            //console.log(this.todos);
 
             return true;
         }
@@ -55,11 +55,20 @@ export class TodoList implements Todo {
         }
     }
 
-    public markTodoCompleted(todoIndex: number): void {
-        //  if todoIndex
+    public static resetTodosArray(): void {
+        let tempTodos: Todo[] = [];
+        this.todos = tempTodos;
     }
 
-    public static getTodos(): Todo[] {        
+    public static markTodoCompleted(todoIndex: number): void {
+        const tempObject = this.todos[todoIndex];
+        const newTodoList = new TodoList(tempObject.task, true, tempObject.priority);
+
+        this.todos.splice(todoIndex, 1, newTodoList);
+    }
+
+    public static getTodos(): Todo[] {
+
         return this.todos;
     }
 
@@ -69,15 +78,16 @@ export class TodoList implements Todo {
 
     public static loadFromLocalStorage(): void {
         if (localStorage.length >= 1) {
+            let tempTodos: Todo[] = [];
             for (let i = 0; i < localStorage.length; i++) {
-   
-                /*const value: string = localStorage.getItem("Allt sparas i denna key")!;
-                let tempObject: Todo = ((JSON.parse(value)));*/
-                this.todos.push(JSON.parse(localStorage.getItem("Allt sparas i denna key")!));
-               // console.log(tempObject);
+                let tempArray: any = JSON.parse(localStorage.getItem("Allt sparas i denna key")!);
+                tempArray.forEach(element => {
+                    tempTodos.push(element);
+                })
             }
+            this.todos = tempTodos;
         }
-        console.log(this.todos);
+        // console.log(this.todos);
     }
 
 }

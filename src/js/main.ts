@@ -1,18 +1,29 @@
 import { TodoList } from "./todolist-class";
 
-//const todoList = new TodoList(); //Skapar en instans av TodoList
-
 //För att kunna läsa in formuläret
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
 const emptyLocalStorage: HTMLFormElement = document.getElementById("empty-localstorage") as HTMLFormElement;
+const todoDiv: HTMLDivElement = (document.getElementById("todo-div") as HTMLInputElement);
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    TodoList.loadFromLocalStorage();
+    buildList();
+
+    todoDiv.addEventListener("click", (e) => {
+        if((e.target as HTMLButtonElement).classList.contains('remove-todo')){
+
+        }
+        if((e.target as HTMLButtonElement).classList.contains('box')){
+            TodoList.markTodoCompleted(Number((e.target as HTMLElement).id));
+            TodoList.saveToLocalStorage();
+        }
+    })
 
     emptyLocalStorage.addEventListener("click", (e) => {
         localStorage.clear();
         alert("Local storage är nu tomt!");
+        todoDiv.innerHTML="";
+        TodoList.resetTodosArray();
     });
 
     // Lägg till händelselyssnare på formuläret
@@ -22,19 +33,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function buildList(): void {
+    TodoList.loadFromLocalStorage();
+    let tempArray = TodoList.getTodos();
+    
+    if(tempArray.length > 0){
+        todoDiv.innerHTML="";
+
+        for (let i = 0; i < tempArray.length; i++) {
+            let box: string = "";
+            let disabled: string = "";
+            const newDiv: HTMLDivElement = document.createElement("div");
+            console.log(tempArray[i].completed);
+            if(tempArray[i].completed === true){
+                box = "checked";
+                disabled = "disabled";
+            }
+            newDiv.classList.add(`priority${tempArray[i].priority}`);
+            newDiv.innerHTML=`
+            <h2>Datum</h2>
+            <p>${tempArray[i].task}</p>
+            <h3>Prioritet: ${tempArray[i].priority}</h3>
+            <label for="completed">Färdig:</label>
+            <input type="checkbox" class="box" ${disabled} ${box} id="${i}" name="completed">
+            <button title="${i}" class="remove-todo">Ta bort</button>
+            `;
+            todoDiv.appendChild(newDiv);
+        }
+    };
+}
+
+
 
 
 function addTodoList(): void {
     // Hämta kursdata från formuläret med lätt textformatering
     const taskInput: string = (document.getElementById("task") as HTMLInputElement).value;
-    const completedInput: boolean = (document.getElementById("completed") as HTMLInputElement).checked;
+    //const completedInput: boolean = (document.getElementById("completed") as HTMLInputElement).checked;
     const priorityInput: number = parseInt((document.getElementById("priority") as HTMLInputElement).value);
+    const completedInput: boolean = false;
     const newTodoList = new TodoList (taskInput, completedInput, priorityInput);
     
     if(TodoList.addTodo(newTodoList)){
         alert("Uppgiften är sparad till Todo-listan :)");
         TodoList.saveToLocalStorage();
-
+        buildList();
     }   else{
         alert("Fyll i både uppgift och prioritet!");
     }
