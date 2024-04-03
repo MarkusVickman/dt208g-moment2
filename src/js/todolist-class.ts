@@ -12,68 +12,69 @@ import { Todo } from "./interfaces";
 export class TodoList implements Todo {
     task: string;
     completed: boolean;
-    priority: /*PriorityRange*/number;
+    priority: number;
 
-    todos: Todo[] = [];
+    private static todos: Todo[] = [];
 
     constructor(task: string, completed: boolean, priority: /*PriorityRange*/number) {
 
-        let newTask: Todo = {
-            task: task,
-            completed: completed,
-            priority: priority
-        };
+        this.task = task;
+        this.completed = completed;
+        this.priority = priority;
 
-      //  this.todos.push(newTask);
-        this.saveToLocalStorage(newTask);
-        this.loadFromLocalStorage();
+        //  this.todos.push(newTask);
+        /*
+        this.saveToLocalStorage();
+        this.loadFromLocalStorage();*/
         //console.log(this.todos);
 
     }
 
-    addTodo(task: string, completed: boolean, priority: /*PriorityRange*/number): boolean{
-        if(task.length > 0 && priority === (1|2|3)){
+    public static addTodo(addNew: Todo/*task: string, completed: boolean, priority: number*/): boolean {
+        console.log(addNew.task.length + " " + addNew.priority);
+        if (addNew.task.length > 0 && (addNew.priority === 1 || addNew.priority === 2 || addNew.priority === 3)) {
+            this.todos.push(addNew);
+            let sortedArray: Todo[] = this.todos.sort((n1,n2) => {
+                if (n1.priority > n2.priority) {
+                    return 1;
+                }
+            
+                if (n1.priority < n2.priority) {
+                    return -1;
+                }
+            
+                return 0;
+            });
+            this.todos = sortedArray;
+            console.log(this.todos);
+
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
 
-    markTodoCompleted(todoIndex: number): void{
-      //  if todoIndex
+    public markTodoCompleted(todoIndex: number): void {
+        //  if todoIndex
     }
 
-    getTodos(): Todo[]{
-      /*  if (localStorage.length >= 1) {
-            for (let i = 0; i < localStorage.length; i++) {
-                // set iteration key name
-                const key: string = localStorage.key(i)!;
-                // use key name to retrieve the corresponding value
-                const value: string = localStorage.getItem(key)!;
-                this.todos((JSON.parse(value)));
-            }
-        }*/
-        return 
+    public static getTodos(): Todo[] {        
+        return this.todos;
     }
 
-    saveToLocalStorage(saveTask: Todo): void{
-
-        //console.log(testDescription);
-         //Localstorage sparar todo-datan
-         localStorage.setItem(saveTask.task, JSON.stringify(saveTask));
+    public static saveToLocalStorage(): void {
+        localStorage.setItem("Allt sparas i denna key", JSON.stringify(this.todos));
     }
 
-    loadFromLocalStorage(): void{
+    public static loadFromLocalStorage(): void {
         if (localStorage.length >= 1) {
             for (let i = 0; i < localStorage.length; i++) {
-                // 
-                const key: string = localStorage.key(i)!;
-                // 
-                const value: any = localStorage.getItem(key)!;
-                let tempObject: Todo = ((JSON.parse(value)));
-                this.todos.push(tempObject);
-                console.log(tempObject);
+   
+                /*const value: string = localStorage.getItem("Allt sparas i denna key")!;
+                let tempObject: Todo = ((JSON.parse(value)));*/
+                this.todos.push(JSON.parse(localStorage.getItem("Allt sparas i denna key")!));
+               // console.log(tempObject);
             }
         }
         console.log(this.todos);

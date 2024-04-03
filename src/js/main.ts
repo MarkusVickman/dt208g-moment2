@@ -1,30 +1,45 @@
 import { TodoList } from "./todolist-class";
 
+//const todoList = new TodoList(); //Skapar en instans av TodoList
+
 //För att kunna läsa in formuläret
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
 const emptyLocalStorage: HTMLFormElement = document.getElementById("empty-localstorage") as HTMLFormElement;
 
-
-emptyLocalStorage.addEventListener("click", (e) => {
-    localStorage.clear();
-    alert("Local storage är nu tomt!");
-})
-
-// Lägg till händelselyssnare på formuläret
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    // Hämta kursdata från formuläret med lätt textformatering
-    const taskInput: string = (document.getElementById("task") as HTMLInputElement).value;
-    const completedInput: boolean = (document.getElementById("completed") as HTMLInputElement).checked;
-    const priorityInput: number = parseInt((document.getElementById("priority") as HTMLInputElement).value);
+document.addEventListener('DOMContentLoaded', () => {
     
-    new TodoList (taskInput, completedInput, priorityInput);
+    TodoList.loadFromLocalStorage();
 
+    emptyLocalStorage.addEventListener("click", (e) => {
+        localStorage.clear();
+        alert("Local storage är nu tomt!");
+    });
 
+    // Lägg till händelselyssnare på formuläret
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        addTodoList();
+    });
 });
 
 
 
+function addTodoList(): void {
+    // Hämta kursdata från formuläret med lätt textformatering
+    const taskInput: string = (document.getElementById("task") as HTMLInputElement).value;
+    const completedInput: boolean = (document.getElementById("completed") as HTMLInputElement).checked;
+    const priorityInput: number = parseInt((document.getElementById("priority") as HTMLInputElement).value);
+    const newTodoList = new TodoList (taskInput, completedInput, priorityInput);
+    
+    if(TodoList.addTodo(newTodoList)){
+        alert("Uppgiften är sparad till Todo-listan :)");
+        TodoList.saveToLocalStorage();
+
+    }   else{
+        alert("Fyll i både uppgift och prioritet!");
+    }
+
+}
 
 
 
