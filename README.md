@@ -4,7 +4,7 @@
 På den här webbplatsen kan du lagra Att göra-notiser med text och prioritet. Inlägg som är klarmarkerade sparas i en separat lista.
 
 ### Min lösning innehåller i stora drag:
-* Eventlisteners för för knappar och formulär
+* Eventlisteners för knappar och formulär
 * Funktionerna:
   * removeTodo() Funktion som gör att när en "ta bort"-knapp trycks på tas tillhörande inlägg bort. Eller om en checkbox markeras blir completed i Todo-objektet ändrat till true.
   * buildList() Huvud funktionen för att bygga html innehåll på sidan. Här hämtas arrayen med todos och utifrån den väljs vilken information som ska skrivas ut på sidan. Här väljs vilken lista som todon ska skrivas ut till beroende på om den är klarmarkerad.
