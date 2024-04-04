@@ -2,5 +2,5 @@
 export interface Todo {
     task: string;
     completed: boolean;
-    priority: /*PriorityRange*/number;
+    priority: number;
 }

@@ -1,41 +1,18 @@
-/*SUPERSNYGG BAKGRUNDFÄRG*/
+/*Allmän styling*/
 *{
     box-sizing: border-box;
+    font-family: "Gloria Hallelujah", cursive;
+    font-weight: 400;
+    font-style: normal;
 }
+
+/*Allmän styling*/
 body{
     background-color: rgb(248, 246, 240);
     color: black;
     text-align: left;
     font-size: 1.1em;
-    line-height: 1.5em;
-}
-
-input{
-    margin-bottom: 10px;
-}
-
-label{
-    font-size: 1em;
-}
-
-#completed{
-    width: 20px;
-    height: 20px;
-}
-
-#task{
-    width: 300px;
-    max-width: 95%;
-    height: 50px;
-    margin-bottom: 10px;
-}
-
-select{
-    font-size: 1em;
-}
-
-option{
-    font-size: 1.1em;
+    line-height: 1.3em;
 }
 
 /*begränsar vidd på main*/
@@ -46,16 +23,112 @@ main{
     margin-right: auto;
 }
 
+/*Centrerar rubriker*/
+h1, h2{
+    text-align: center;
+}
+
+/*Styling av element i inläggen*/
+.inline{
+    display: inline-block;
+    position: relative;
+    bottom: -15px;
+}
+
+/*centreringsdiv till kategorivals-knapparna*/
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
 /*responsivt formulär*/
 form{
-    width: 450px;
+    width: 300px;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 70px;
-    box-shadow: 3px 3px 3px 3px rgb(0, 0, 0, 0.2);
-    padding: 40px;
+    padding-top: 0px;
+    text-align: center;
+}
 
+/*textarea i formuläret*/
+#task{
+    width: 300px;
+    max-width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+/*option i formulär*/
+option{
+    font-size: 1.1em;
+}
+
+/*Styling av linje under kategorival*/
+#line{
+    height: 2px;
+    width: 100%;
+    background-color: black;
+    margin-top: 10px;
+}
+
+/*Artikel för färdiga inlägg*/
+#completed-article{
+    display: none;
+}
+
+/*Styling av marginal mellan pri och färdig i varhe inlägg*/
+.priority{
+    margin-right: 50px;
+    position: relative;
+}
+
+/*styling av div till inläggen*/
+.priority1, .priority2, .priority3{
+    background-color:  rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: white;
+    max-width: 450px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*hover effekt*/
+.priority1:hover, .priority2:hover, .priority3:hover{
+    background-color:  rgba(0, 0, 0, 0.9);
+    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
+}
+
+/*Tar bort marginaler för priority p*/
+.priority1 p, .priority2 p, .priority3 p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/*Knappar för att välja lista för ofärdiga eller färdiga todos*/
+#todo-btn, #completed-btn{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/*Startstiling för färdiga todos. Ändras med script*/
+#todo-btn{
+    text-decoration: underline;
+}
+
+/*Knappar för att välja lista för ofärdiga eller färdiga todos*/
+#todo-btn:hover, #completed-btn:hover{
+    background-color: white;
 }
 
 /*Styling av knappar*/
@@ -80,87 +153,19 @@ button:hover{
     box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
 }
 
+/*Styling av knapp för att tömma listan*/
 #empty-localstorage{
     background-color: rgb(255, 183, 183);
 }
 
+/*Styling av knapp för att tömma listan*/
 #empty-localstorage:hover, .remove-todo:hover{
     background-color: rgb(255, 137, 137);
     box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
 }
 
+/*Styling av ta bort knapparna till varje inlägg*/
 .remove-todo{
     float: right;
     bottom: 0px;
-}
-
-.inline{
-    display: inline-block;
-    position: relative;
-    bottom: -15px;
-}
-
-.priority1 p, .priority2 p, .priority3 p{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-.priority{
-    margin-right: 50px;
-    position: relative;
-
-}
-
-
-
-/*styling av div till inläggen*/
-.priority1, .priority2, .priority3{
-    background-color:  rgba(0, 0, 0, 0.733);
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    color: white;
-    max-width: 450px;
-    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.2);
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#todo-btn{
-    margin-right: 40px;
-}
-
-.center{
-    margin-left: auto;
-    margin-right: auto;
-    width: 280px;
-}
-
-/*hover effekt*/
-.priority1:hover, .priority2:hover, .priority3:hover{
-    background-color:  rgba(0, 0, 0, 0.9);
-    box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.4);
-}
-
-/*Padding till raderna i vardera inlägg*/ 
-.edit{
-    padding: 5px;
-}
-
-/*hover effekt för att visa att det är inputfält*/
-.edit:hover, .edit:focus {
-    border-style: solid;
-    border-color: white;
-    border-width: 3px;
-    border-radius: 5px;
-}
-
-h1, h2{
-    text-align: center;
-}
-
-h3{
-    margin-top: 0px;
-    margin-bottom: ;
 }

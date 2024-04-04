@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DT208G Moment 2</title>
+    <!--Länk till script-fil-->
     <script src="js/main.ts" type="module"></script>
     <!--Länk till css-fil-->
     <link rel="stylesheet" href="css/main.css">
+    <!--Länk till google-fonts typsnitt-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <!--Huvudsidan med en todo-lista-->
     <main id="main">
         <h1>Todo-lista</h1>
-        <p>Skapa din egna todo-lista.</p>
-            <!--Formulär för att skriva in kurser som lagras till lokalstorage. URLEN fungerar smidigare sparad som text för mobilanvändare-->
+        <!--Formulär för att skriva in todos som lagras till localstorage.-->
         <form id="form">
             <label for="task"></label><br>
-            <textarea id="task" name="task" placeholder="Skriv en todo här...."></textarea>
+            <textarea id="task" name="task" placeholder="Skriv din nya todo här...."></textarea>
             <br>
-            <!--<label for="completed">Färdig:</label>
-            <input type="checkbox" id="completed" name="completed">
-            <br>-->
             <label for="priority">Prioritet:</label>
             <select id="priority" name="priority">
-              <option value="" selected disabled hidden></option>
-              <option value=1>1</option>
-              <option value=2>2</option>
-              <option value=3>3</option>
-            </select> 
+                <option value="" selected disabled hidden>.</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+            </select>
             <br>
-            <button type="submit" class="inline">Spara</button>       
+            <!--Knappar för submit och rensa hela todo-listan-->
+            <button type="submit" class="inline">Spara</button>
             <button type="button" id="empty-localstorage" class="inline">Radera listan</button>
         </form>
-
-        <div class="center"><button id="todo-btn" class="inline">Kvar att göra</button><button id="completed-btn" class="inline">Avklarade</button></div>
+        <!--Centrerar kategorivalen-->
+        <div class="center">
+            <div id="todo-btn">Kvar att göra</div>
+            <div id="completed-btn">Avklarade</div>
+        </div>
+        <!--Linje för stil-->
+        <div id="line"></div>
+        <!--För att skriva ut todo som är aktiva-->
         <article id="todo-article">
             <h2>Kvar att göra</h2>
             <div id="todo-div"></div>
         </article>
+        <!--För att skriva ut todo som är avklarade-->
         <article id="completed-article">
             <h2>Avklarade</h2>
-        <div id="todo-completed"></div>
-    </article>
+            <div id="todo-completed"></div>
+        </article>
     </main>
 </body>
+
 </html>
